@@ -1,0 +1,40 @@
+// Main styles
+
+$main-color: #333333;
+$main-border-color: #DDDDDD;
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, SegoeUI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica, sans-serif;
+  color: $main-color;
+}
+
+.pokemon-list {
+  display: flex;
+  flex-direction: column;
+
+  &__pokemon-single {
+    border-bottom: 1px solid $main-border-color;
+    padding: 20px;
+    margin-bottom: 30px;
+
+    &--pokemon-stats {
+      .left-part {
+        display: inline-block;
+        width: 48%;
+        vertical-align: top;
+        margin-right: 1%;
+      }
+
+      .right-part {
+        display: inline-block;
+        width: 48%;
+        vertical-align: top;
+      }
+
+      .item {
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
