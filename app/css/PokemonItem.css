@@ -1,0 +1,31 @@
+.item {
+  border-bottom: 1px solid #DDDDDD;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.name {
+  font-size: 16px;
+}
+
+.description {
+  color: #757575;
+}
+
+.left {
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
+  margin-right: 1%;
+}
+
+.right {
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
+}
+
+.subitem {
+  display: block;
+  margin-bottom: 10px;
+}
