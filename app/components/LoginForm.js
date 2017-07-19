@@ -5,15 +5,23 @@ import Button from './Button';
 import styles from '../css/LoginElements.css';
 
 class LoginForm extends Component {
-  _registerUser() {
-    this.context.transitionTo(this.props.registerLink);
+  constructor(args) {
+    super(args);
+    this.state  = {
+      inputValue: ''
+    };
+  }
+
+  _handleInputChange(e) {
+    this.setState({
+      inputValue: e.target.value
+    });
   }
 
   render() {
     const email = this.props.loginEmail;
     const password = this.props.loginPassword;
     const click = this.props.onSubmit;
-    const registerLink = <Link to="/register" />;
 
     return(
       <div className={styles.form}>
@@ -23,14 +31,16 @@ class LoginForm extends Component {
           name="loginEmail"
           label="Email address"
           value={email}
-          type="email" />
+          type="email"
+          onChange={this._handleInputChange} />
         </div>
         <div className={styles.wrapper}>
           <Input
           name="loginPassword"
           label="Password"
           value={password}
-          type="password" />
+          type="password"
+          onChange={this._handleInputChange} />
         </div>
         <div className={styles.wrapper}>
           <Button
