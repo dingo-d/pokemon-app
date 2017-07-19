@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router';
+
 import Input from './Input';
 import Button from './Button';
 import styles from '../css/LoginElements.css';
@@ -45,6 +47,7 @@ class RegisterForm extends Component {
           <Button
           name="Register"
           onClick={click} />
+          <Link to="/" className={styles.register}>Back</Link>
         </div>
       </div>
     );
