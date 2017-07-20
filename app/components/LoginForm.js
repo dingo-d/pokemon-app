@@ -7,8 +7,11 @@ import styles from '../css/LoginElements.css';
 class LoginForm extends Component {
   constructor(args) {
     super(args);
+    this._handleInputChange = this._handleInputChange.bind(this);
     this.state  = {
-      inputValue: ''
+      inputValue: '',
+      loginEmail: '',
+      loginPassword: ''
     };
   }
 
@@ -19,9 +22,9 @@ class LoginForm extends Component {
   }
 
   render() {
-    const email = this.props.loginEmail;
-    const password = this.props.loginPassword;
-    const click = this.props.onSubmit;
+    const email = this.state.loginEmail;
+    const password = this.state.loginPassword;
+    const click = this.state.onSubmit;
 
     return(
       <div className={styles.form}>
