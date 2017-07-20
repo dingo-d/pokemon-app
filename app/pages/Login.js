@@ -4,10 +4,6 @@ import LoginForm from '../components/LoginForm';
 class Login extends Component {
   constructor(args) {
     super(args);
-    this.state = {
-      email: '',
-      password: ''
-    };
   }
 
   _onClick() {
@@ -22,8 +18,6 @@ class Login extends Component {
     return(
       <div>
         <LoginForm
-          loginEmail={this.state.email}
-          loginPassword={this.state.password}
           onSubmit={this._onClick} />
       </div>
     );

@@ -11,7 +11,7 @@
 .wrapper {
   display: block;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .field {
@@ -37,6 +37,8 @@
   border-bottom: 1px solid #DDD;
   padding: 20px;
   margin: 20px 0;
+  font-size: 16px;
+  font-weight: normal;
   box-shadow: none;
   transition: border-color 0.2s ease;
 }
@@ -46,7 +48,7 @@ input:focus {
   border-bottom: 2px solid #D8262C;
 }
 
-input:focus ~ label {
+input:focus ~ label, input:valid ~ label {
   top: -20px;
   left: -2px;
   transform: scale(.75);

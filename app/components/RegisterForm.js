@@ -6,10 +6,38 @@ import Button from './Button';
 import styles from '../css/LoginElements.css';
 
 class RegisterForm extends Component {
+  constructor(args) {
+    super(args);
+    this._handleUsernameChange = this._handleUsernameChange.bind(this);
+    this._handleEmailChange = this._handleEmailChange.bind(this);
+    this._handlePasswordChange = this._handlePasswordChange.bind(this);
+    this.state  = {
+      registerUsername: '',
+      registerEmail: '',
+      registerPassword: '',
+      registerPasswordRepeat: ''
+    };
+  }
+
+  _handleUsernameChange(e) {
+    this.setState({
+      registerUsername: e.target.value
+    });
+  }
+
+  _handleEmailChange(e) {
+    this.setState({
+      registerEmail: e.target.value
+    });
+  }
+
+  _handlePasswordChange(e) {
+    this.setState({
+      registerPassword: e.target.value
+    });
+  }
+
   render() {
-    const username = this.props.registerUsername;
-    const email = this.props.registerEmail;
-    const password = this.props.registerPassword;
     const click = this.props.onSubmit;
 
     return(
@@ -19,28 +47,32 @@ class RegisterForm extends Component {
           <Input
           name="registerUsername"
           label="User name"
-          value={username}
+          value={this.state.registerUsername}
+          required="true"
           type="text" />
         </div>
         <div className={styles.wrapper}>
           <Input
           name="registerEmail"
           label="Email address"
-          value={email}
+          value={this.state.registerEmail}
+          required="true"
           type="email" />
         </div>
         <div className={styles.wrapper}>
           <Input
           name="registerPassword"
           label="Password"
-          value={password}
+          value={this.state.registerPassword}
+          required="true"
           type="password" />
         </div>
         <div className={styles.wrapper}>
           <Input
           name="registerPasswordRepeat"
           label="Repeat password"
-          value={password}
+          value={this.state.registerPasswordRepeat}
+          required="true"
           type="password" />
         </div>
         <div className={styles.wrapper}>

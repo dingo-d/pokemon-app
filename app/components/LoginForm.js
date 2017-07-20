@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
+
 import Input from './Input';
 import Button from './Button';
 import styles from '../css/LoginElements.css';
@@ -7,17 +8,23 @@ import styles from '../css/LoginElements.css';
 class LoginForm extends Component {
   constructor(args) {
     super(args);
-    this._handleInputChange = this._handleInputChange.bind(this);
+    this._handleEmailChange = this._handleEmailChange.bind(this);
+    this._handlePasswordChange = this._handlePasswordChange.bind(this);
     this.state  = {
-      inputValue: '',
       loginEmail: '',
       loginPassword: ''
     };
   }
 
-  _handleInputChange(e) {
+  _handleEmailChange(e) {
     this.setState({
-      inputValue: e.target.value
+      loginEmail: e.target.value
+    });
+  }
+
+  _handlePasswordChange(e) {
+    this.setState({
+      loginPassword: e.target.value
     });
   }
 
@@ -35,7 +42,7 @@ class LoginForm extends Component {
           label="Email address"
           value={email}
           type="email"
-          onChange={this._handleInputChange} />
+          onChange={this._handleEmailChange} />
         </div>
         <div className={styles.wrapper}>
           <Input
@@ -43,7 +50,7 @@ class LoginForm extends Component {
           label="Password"
           value={password}
           type="password"
-          onChange={this._handleInputChange} />
+          onChange={this._handlePasswordChange} />
         </div>
         <div className={styles.wrapper}>
           <Button
