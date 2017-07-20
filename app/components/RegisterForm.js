@@ -47,7 +47,6 @@ class RegisterForm extends Component {
           <Input
           name="registerUsername"
           label="User name"
-          value={this.state.registerUsername}
           required="true"
           type="text" />
         </div>
@@ -55,7 +54,6 @@ class RegisterForm extends Component {
           <Input
           name="registerEmail"
           label="Email address"
-          value={this.state.registerEmail}
           required="true"
           type="email" />
         </div>
@@ -63,7 +61,6 @@ class RegisterForm extends Component {
           <Input
           name="registerPassword"
           label="Password"
-          value={this.state.registerPassword}
           required="true"
           type="password" />
         </div>
@@ -71,7 +68,6 @@ class RegisterForm extends Component {
           <Input
           name="registerPasswordRepeat"
           label="Repeat password"
-          value={this.state.registerPasswordRepeat}
           required="true"
           type="password" />
         </div>
