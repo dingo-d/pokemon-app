@@ -19,7 +19,7 @@ var apiUrl = 'https://pokedex.byinfinum.co/api/v1/';
 export function registerUser(attributes) {
   let messageElement = document.getElementById('message');
   messageElement.innerHTML = '';
-  return axios.post('https://pokedex.byinfinum.co/api/v1/users', attributes, { headers: {'Content-Type': 'application/json'}})
+  return axios.post('https://pokedex.byinfinum.co/api/v1/users', attributes, { headers:{'Accept': 'application/json', 'Content-Type': 'application/json'}})
               .then((response) => {
                 messageElement.innerHTML = 'User created, please log in.';
                 console.log(response);
