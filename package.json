@@ -17,6 +17,7 @@
   "dependencies": {
     "babel-eslint": "^7.2.3",
     "extract-text-webpack-plugin": "^2.1.0",
+    "loglevel": "^1.4.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^3.0.5",
