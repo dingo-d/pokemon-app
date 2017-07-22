@@ -111,9 +111,12 @@ input:-webkit-autofill {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.error {
-  color: #D8262C;
+.message {
   max-width: 400px;
   margin: 0 auto;
   margin-top: 100px;
+}
+
+.error {
+  color: #D8262C;
 }

@@ -22,11 +22,14 @@ class Register extends Component {
   _validateRegisterForm() {
     var formIsValid = true;
     this.state.errors = {};
-    let errorElement = document.getElementById('error_message');
+    let messageElement = document.getElementById('message');
+    messageElement.innerHTML = '';
+    messageElement.classList.remove('error');
 
     if (this.state.password !== this.state.passwordRepeat) {
       this.state.errors.passwordMismatch = 'Passwords do not match!';
-      errorElement.innerHTML = this.state.errors.passwordMismatch;
+      messageElement.innerHTML = this.state.errors.passwordMismatch;
+      messageElement.className += ' error';
       formIsValid = false;
     }
 
@@ -45,7 +48,14 @@ class Register extends Component {
         return;
       }
 
+      let attributes = {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+        password_confirmation: this.state.passwordRepeat
+      };
 
+      registerUser(attributes);
     });
   }
 
@@ -53,7 +63,7 @@ class Register extends Component {
     return(
       <div>
         <RegisterForm onSubmit={this._registerUser} />
-        <div id="error_message" className={styles.error}></div>
+        <div id="message" className={styles.message}></div>
       </div>
     );
   }
