@@ -12,6 +12,7 @@ class Register extends Component {
       email: '',
       password: '',
       passwordRepeat: '',
+      message: '',
       errors: {}
     };
 
@@ -22,14 +23,12 @@ class Register extends Component {
   _validateRegisterForm() {
     var formIsValid = true;
     this.state.errors = {};
-    let messageElement = document.getElementById('message');
-    messageElement.innerHTML = '';
-    messageElement.classList.remove('error');
+    this.state.message = '';
 
     if (this.state.password !== this.state.passwordRepeat) {
-      this.state.errors.passwordMismatch = 'Passwords do not match!';
-      messageElement.innerHTML = this.state.errors.passwordMismatch;
-      messageElement.className += ' error';
+      let message = 'Passwords do not match!';
+      this.state.errors.passwordMismatch = message;
+      this.state.message = message;
       formIsValid = false;
     }
 
@@ -42,7 +41,8 @@ class Register extends Component {
       username: username,
       email: email,
       password: password,
-      passwordRepeat: passwordRepeat
+      passwordRepeat: passwordRepeat,
+      message: ''
     }, () => {
       if (!this._validateRegisterForm()) {
         return;
@@ -55,7 +55,16 @@ class Register extends Component {
         password_confirmation: this.state.passwordRepeat
       };
 
-      registerUser(attributes);
+      registerUser(attributes).then((result) => {
+        this.setState({
+          message: 'User created succesfully. Please log in.'
+        });
+        console.log('success:', result)})
+      .catch((error) => {
+        this.setState({
+          message: 'Something went wrong...'
+        });
+        console.log('error:', error)});
     });
   }
 
@@ -63,7 +72,7 @@ class Register extends Component {
     return(
       <div>
         <RegisterForm onSubmit={this._registerUser} />
-        <div id="message" className={styles.message}></div>
+        <div id="message" className={styles.message}>{this.state.message}</div>
       </div>
     );
   }
