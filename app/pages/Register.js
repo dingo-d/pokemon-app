@@ -1,30 +1,32 @@
 import React, {Component} from 'react';
 import RegisterForm from '../components/RegisterForm';
 
-import {createUser} from '../services/api';
+import {registerUser} from '../services/api';
+import styles from '../css/LoginElements.css';
 
-class Login extends Component {
+class Register extends Component {
   constructor(args) {
     super(args);
     this.state = {
-      email: '',
       username: '',
+      email: '',
       password: '',
       passwordRepeat: '',
       errors: {}
     };
+
+    this._registerUser = this._registerUser.bind(this);
+    this._validateRegisterForm = this._validateRegisterForm.bind(this);
   }
 
-  componentWillMount() {
-
-  }
-
-  validateRegisterForm() {
+  _validateRegisterForm() {
     var formIsValid = true;
     this.state.errors = {};
+    let errorElement = document.getElementById('error_message');
 
     if (this.state.password !== this.state.passwordRepeat) {
       this.state.errors.passwordMismatch = 'Passwords do not match!';
+      errorElement.innerHTML = this.state.errors.passwordMismatch;
       formIsValid = false;
     }
 
@@ -32,28 +34,29 @@ class Login extends Component {
     return formIsValid;
   }
 
-  registerUser(e) {
-    e.preventDefault();
-    if (!this.validateRegisterForm()) {
-      return;
-    }
+  _registerUser(username, email, password, passwordRepeat) {
+    this.setState({
+      username: username,
+      email: email,
+      password: password,
+      passwordRepeat: passwordRepeat
+    }, () => {
+      if (!this._validateRegisterForm()) {
+        return;
+      }
 
 
-
+    });
   }
 
   render() {
     return(
       <div>
-        <RegisterForm
-          registerUsername={this.state.username}
-          registerEmail={this.state.email}
-          registerPassword={this.state.password}
-          registerPasswordRepeat={this.state.passwordRepeat}
-          onSubmit={this.registerUser} />
+        <RegisterForm onSubmit={this._registerUser} />
+        <div id="error_message" className={styles.error}></div>
       </div>
     );
   }
 }
 
-export default Login;
+export default Register;

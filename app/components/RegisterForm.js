@@ -8,76 +8,100 @@ import styles from '../css/LoginElements.css';
 class RegisterForm extends Component {
   constructor(args) {
     super(args);
+    this.state  = {
+      username: '',
+      email: '',
+      password: '',
+      passwordRepeat: ''
+    };
+
     this._handleUsernameChange = this._handleUsernameChange.bind(this);
     this._handleEmailChange = this._handleEmailChange.bind(this);
     this._handlePasswordChange = this._handlePasswordChange.bind(this);
-    this.state  = {
-      registerUsername: '',
-      registerEmail: '',
-      registerPassword: '',
-      registerPasswordRepeat: ''
-    };
+    this._handlePasswordRepeatChange = this._handlePasswordRepeatChange.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   _handleUsernameChange(e) {
+    let value = e.target.value;
     this.setState({
-      registerUsername: e.target.value
+      username: value
     });
-  }
+  };
 
   _handleEmailChange(e) {
+    let value = e.target.value;
     this.setState({
-      registerEmail: e.target.value
+      email: value
     });
   }
 
   _handlePasswordChange(e) {
+    let value = e.target.value;
     this.setState({
-      registerPassword: e.target.value
+      password: value
     });
   }
 
-  render() {
-    const click = this.props.onSubmit;
+  _handlePasswordRepeatChange(e) {
+    let value = e.target.value;
+    this.setState({
+      passwordRepeat: value
+    });
+  }
 
+  _handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit(
+      this.state.username,
+      this.state.email,
+      this.state.password,
+      this.state.passwordRepeat
+    )
+  }
+
+  render() {
     return(
-      <div className={styles.form}>
+      <form className={styles.form} onSubmit={this._handleSubmit}>
         <h3 className={styles.title}>Pokemon User Register</h3>
         <div className={styles.wrapper}>
           <Input
-          name="registerUsername"
-          label="User name"
+          name="username"
+          label="Username"
           required="true"
+          handleChange={this._handleUsernameChange}
           type="text" />
         </div>
         <div className={styles.wrapper}>
           <Input
-          name="registerEmail"
+          name="email"
           label="Email address"
           required="true"
+          handleChange={this._handleEmailChange}
           type="email" />
         </div>
         <div className={styles.wrapper}>
           <Input
-          name="registerPassword"
+          name="password"
           label="Password"
           required="true"
+          handleChange={this._handlePasswordChange}
           type="password" />
         </div>
         <div className={styles.wrapper}>
           <Input
-          name="registerPasswordRepeat"
+          name="passwordRepeat"
           label="Repeat password"
           required="true"
+          handleChange={this._handlePasswordRepeatChange}
           type="password" />
         </div>
         <div className={styles.wrapper}>
           <Button
-          name="Register"
-          onClick={click} />
+          name="Register" />
           <Link to="/" className={styles.register}>Back</Link>
         </div>
-      </div>
+      </form>
     );
   }
 }
