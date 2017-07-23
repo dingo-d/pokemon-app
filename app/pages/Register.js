@@ -60,9 +60,8 @@ class Register extends Component {
         this.setState({
           message: 'User created succesfully. Please log in.'
         });
-        console.log('success:', result);
         localSave('apiToken', result.data.attributes['auth-token']);
-      })
+        console.log('success:', result)})
       .catch((error) => {
         this.setState({
           message: 'Something went wrong...'

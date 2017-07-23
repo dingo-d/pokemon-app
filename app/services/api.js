@@ -5,8 +5,7 @@ export function registerUser(attributes) {
       attributes: attributes
     }
   };
-console.log(body);
-console.log(JSON.stringify(body));
+
   return fetch('https://pokedex.byinfinum.co/api/v1/users', {
     method: 'POST',
     headers: {
