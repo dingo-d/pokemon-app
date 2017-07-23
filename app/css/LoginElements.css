@@ -72,6 +72,7 @@ input:-webkit-autofill {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   color: #FFFFFF;
   cursor: pointer;
+  outline: none;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
@@ -98,6 +99,7 @@ input:-webkit-autofill {
   color: #FFFFFF;
   cursor: pointer;
   text-decoration: none;
+  outline: none;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RegisterForm from '../components/RegisterForm';
 
 import {registerUser} from '../services/api';
+import {localSave} from '../services/storage';
 import styles from '../css/LoginElements.css';
 
 class Register extends Component {
@@ -59,7 +60,9 @@ class Register extends Component {
         this.setState({
           message: 'User created succesfully. Please log in.'
         });
-        console.log('success:', result)})
+        console.log('success:', result);
+        localSave('apiToken', result.data.attributes['auth-token']);
+      })
       .catch((error) => {
         this.setState({
           message: 'Something went wrong...'
