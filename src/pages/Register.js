@@ -37,26 +37,13 @@ class Register extends Component {
     return formIsValid;
   }
 
-  _registerUser(username, email, password, passwordRepeat) {
-    this.setState({
-      username: username,
-      email: email,
-      password: password,
-      passwordRepeat: passwordRepeat,
-      message: ''
-    }, () => {
-      if (!this._validateRegisterForm()) {
-        return;
-      }
+  _registerUser(username, email, password, password_confirmation) {
+    if (!this._validateRegisterForm()) {
+      return;
+    }
 
-      let attributes = {
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
-        password_confirmation: this.state.passwordRepeat
-      };
-
-      registerUser(attributes).then((result) => {
+    registerUser({username, email, password, password_confirmation})
+      .then((result) => {
         this.setState({
           message: 'User created succesfully. Please log in.'
         });
@@ -66,8 +53,8 @@ class Register extends Component {
         this.setState({
           message: 'Something went wrong...'
         });
-        console.log('error:', error)});
-    });
+        console.log('error:', error);
+      });
   }
 
   render() {

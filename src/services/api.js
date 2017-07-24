@@ -1,8 +1,8 @@
 export function registerUser(attributes) {
-  let body = {
+  const body = {
     data: {
       type: 'users',
-      attributes: attributes
+      attributes
     }
   };
 
@@ -12,6 +12,10 @@ export function registerUser(attributes) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
-  }).then((response) => response.json());
+  }).then((response) => {
+    if (response.ok) {
+      return response.json();
+    }
+    throw new Error('Network response was not ok.')});
 }
 
