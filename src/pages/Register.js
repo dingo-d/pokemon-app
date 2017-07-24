@@ -13,52 +13,68 @@ class Register extends Component {
       email: '',
       password: '',
       passwordRepeat: '',
-      message: '',
-      errors: {}
+      message: ''
     };
 
     this._registerUser = this._registerUser.bind(this);
+    this._errorHandler = this._errorHandler.bind(this);
     this._validateRegisterForm = this._validateRegisterForm.bind(this);
   }
 
-  _validateRegisterForm() {
-    var formIsValid = true;
-    this.state.errors = {};
+  _validateRegisterForm(password, passwordConfirmation) {
+    let formIsValid = true;
     this.state.message = '';
 
-    if (this.state.password !== this.state.passwordRepeat) {
-      let message = 'Passwords do not match!';
-      this.state.errors.passwordMismatch = message;
-      this.state.message = message;
+    if (password !== passwordConfirmation) {
+      this.setState({
+        message: 'Passwords do not match!'
+      });
       formIsValid = false;
     }
 
-    this.setState({errors: this.state.errors});
     return formIsValid;
   }
 
-  _registerUser(username, email, password, password_confirmation) {
-    if (!this._validateRegisterForm()) {
+  _errorHandler(errorObject) {
+    let errorMessage = '';
+    for (const error in errorObject) {
+      if (errorObject.hasOwnProperty(error)) {
+        const pointer = errorObject[error].source.pointer.split('/').pop();
+        const detail = errorObject[error].detail;
+        errorMessage += `${pointer} ${detail};`;
+      }
+    }
+    return errorMessage;
+  }
+
+  _registerUser(username, email, password, passwordConfirmation) {
+    if (!this._validateRegisterForm(password, passwordConfirmation)) {
       return;
     }
 
-    registerUser({username, email, password, password_confirmation})
+    registerUser({username, email, password, passwordConfirmation})
       .then((result) => {
+        if (typeof result.errors !== 'undefined') {
+          this.setState({
+            message: this._errorHandler(result.errors)
+          });
+          return;
+        }
         this.setState({
           message: 'User created succesfully. Please log in.'
         });
         localSave('apiToken', result.data.attributes['auth-token']);
-        console.log('success:', result)})
+      })
       .catch((error) => {
+        const errorMessage = `Error: ${error}`;
         this.setState({
-          message: 'Something went wrong...'
+          message: errorMessage
         });
-        console.log('error:', error);
       });
   }
 
   render() {
-    return(
+    return (
       <div>
         <RegisterForm onSubmit={this._registerUser} />
         <div id="message" className={styles.message}>{this.state.message}</div>
