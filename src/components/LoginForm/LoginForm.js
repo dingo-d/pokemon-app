@@ -8,57 +8,67 @@ import styles from './LoginForm.css';
 class LoginForm extends Component {
   constructor(args) {
     super(args);
+    this.state = {
+      email: '',
+      password: ''
+    };
+
     this._handleEmailChange = this._handleEmailChange.bind(this);
     this._handlePasswordChange = this._handlePasswordChange.bind(this);
-    this.state = {
-      loginEmail: '',
-      loginPassword: ''
-    };
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   _handleEmailChange(e) {
     this.setState({
-      loginEmail: e.target.value
+      email: e.target.value
     });
   }
 
   _handlePasswordChange(e) {
     this.setState({
-      loginPassword: e.target.value
+      password: e.target.value
     });
   }
 
-  render() {
-    const email = this.state.loginEmail;
-    const password = this.state.loginPassword;
-    const click = this.state.onSubmit;
+  _handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit(
+      this.state.email,
+      this.state.password
+    );
+  }
 
-    return(
-      <div className={styles.form}>
+  render() {
+    const email = this.state.email;
+    const password = this.state.password;
+
+    return (
+      <form className={styles.form} onSubmit={this._handleSubmit}>
         <h3 className={styles.title}>Pokemon Login</h3>
         <div className={styles.wrapper}>
           <Input
-          name="loginEmail"
+          name="email"
           label="Email address"
           value={email}
           type="email"
-          onChange={this._handleEmailChange} />
+          required="true"
+          handleChange={this._handleEmailChange} />
         </div>
         <div className={styles.wrapper}>
           <Input
-          name="loginPassword"
+          name="password"
           label="Password"
           value={password}
           type="password"
-          onChange={this._handlePasswordChange} />
+          required="true"
+          handleChange={this._handlePasswordChange} />
         </div>
         <div className={styles.wrapper}>
           <Button
-          name="Log in"
-          onClick={click} />
+          name="Log in" />
           <Link to="/register" className={styles.register}>Register</Link>
         </div>
-      </div>
+      </form>
     );
   }
 }

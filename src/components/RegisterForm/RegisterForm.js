@@ -23,30 +23,26 @@ class RegisterForm extends Component {
   }
 
   _handleUsernameChange(e) {
-    let value = e.target.value;
     this.setState({
-      username: value
+      username: e.target.value
     });
-  };
+  }
 
   _handleEmailChange(e) {
-    let value = e.target.value;
     this.setState({
-      email: value
+      email: e.target.value
     });
   }
 
   _handlePasswordChange(e) {
-    let value = e.target.value;
     this.setState({
-      password: value
+      password: e.target.value
     });
   }
 
   _handlePasswordRepeatChange(e) {
-    let value = e.target.value;
     this.setState({
-      passwordRepeat: value
+      passwordRepeat: e.target.value
     });
   }
 
@@ -57,11 +53,11 @@ class RegisterForm extends Component {
       this.state.email,
       this.state.password,
       this.state.passwordRepeat
-    )
+    );
   }
 
   render() {
-    return(
+    return (
       <form className={styles.form} onSubmit={this._handleSubmit}>
         <h3 className={styles.title}>Pokemon User Register</h3>
         <div className={styles.wrapper}>
