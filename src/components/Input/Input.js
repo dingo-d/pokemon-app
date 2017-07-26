@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../css/LoginElements.css';
+import styles from './Input.css';
 
 const Input = ({name, label, value, placeholder, type, onClick, handleChange, required }) => (
   <div className={styles.field}>

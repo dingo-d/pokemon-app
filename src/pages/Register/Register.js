@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import RegisterForm from '../components/RegisterForm';
+import RegisterForm from '../../components/RegisterForm/RegisterForm';
 
-import {registerUser} from '../services/api';
-import {localSave} from '../services/storage';
-import styles from '../css/LoginElements.css';
+import {registerUser} from '../../services/api';
+import {localSave} from '../../services/storage';
+import styles from './Register.css';
 
 class Register extends Component {
   constructor(args) {
@@ -41,7 +41,7 @@ class Register extends Component {
       if (errorObject.hasOwnProperty(error)) {
         const pointer = errorObject[error].source.pointer.split('/').pop();
         const detail = errorObject[error].detail;
-        errorMessage += `${pointer} ${detail};`;
+        errorMessage += `${pointer} ${detail}; `;
       }
     }
     return errorMessage;

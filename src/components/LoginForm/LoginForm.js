@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+import {Link} from 'react-router';
 
-import Input from './Input';
-import Button from './Button';
-import styles from '../css/LoginElements.css';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
+import styles from './LoginForm.css';
 
 class LoginForm extends Component {
   constructor(args) {
     super(args);
     this._handleEmailChange = this._handleEmailChange.bind(this);
     this._handlePasswordChange = this._handlePasswordChange.bind(this);
-    this.state  = {
+    this.state = {
       loginEmail: '',
       loginPassword: ''
     };
