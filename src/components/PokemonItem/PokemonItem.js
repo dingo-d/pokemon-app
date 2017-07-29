@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../css/PokemonItem.css';
+import styles from './PokemonItem.css';
 
 const PokemonItem = ({pokemon: {data: {attributes} } }) => (
   <div className={styles.item}>

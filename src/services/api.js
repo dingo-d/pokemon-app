@@ -32,4 +32,6 @@ export function loginUser(attributes) {
   }).then((response) => response.json());
 }
 
+export function getPokemons() {
 
+}

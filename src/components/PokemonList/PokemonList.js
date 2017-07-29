@@ -1,5 +1,5 @@
 import React from 'react';
-import PokemonItem from './PokemonItem';
+import PokemonItem from '../PokemonItem/PokemonItem';
 import styles from './PokemonList.css';
 
 const PokemonList = ({pokemons}) => (

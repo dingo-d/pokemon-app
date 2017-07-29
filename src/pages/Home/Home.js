@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PokemonList from '../../components/PokemonList/PokemonList';
 
 class Home extends Component {
   render() {
