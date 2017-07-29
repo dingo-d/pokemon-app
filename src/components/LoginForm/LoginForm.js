@@ -44,7 +44,6 @@ class LoginForm extends Component {
 
     return (
       <form className={styles.form} onSubmit={this._handleSubmit}>
-        <h3 className={styles.title}>Pokemon Login</h3>
         <div className={styles.wrapper}>
           <Input
           name="email"

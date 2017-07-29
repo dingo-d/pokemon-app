@@ -59,7 +59,6 @@ class RegisterForm extends Component {
   render() {
     return (
       <form className={styles.form} onSubmit={this._handleSubmit}>
-        <h3 className={styles.title}>Pokemon User Register</h3>
         <div className={styles.wrapper}>
           <Input
           name="username"

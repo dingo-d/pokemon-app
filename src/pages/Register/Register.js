@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import Logo from '../../components/Logo/Logo';
 
 import {registerUser} from '../../services/api';
 import {localSave} from '../../services/storage';
 import {errorHandler} from '../../services/errorHandler';
+
 import styles from './Register.css';
 
 class Register extends Component {
@@ -64,6 +66,7 @@ class Register extends Component {
   render() {
     return (
       <div>
+        <Logo />
         <RegisterForm onSubmit={this._registerUser} />
         <div id="message" className={styles.message}>{this.state.message}</div>
       </div>

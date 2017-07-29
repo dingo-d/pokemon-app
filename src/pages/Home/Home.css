@@ -1,0 +1,20 @@
+.container {
+  text-align: center;
+}
+
+.title {
+  display: inline-block;
+  font-weight: normal;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.title:after {
+  content:"";
+  width: 110%;
+  height: 3px;
+  background: #314E8F;
+  position: absolute;
+  bottom: -10px;
+  left: -5%;
+}

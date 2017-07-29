@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
+
 import LoginForm from '../../components/LoginForm/LoginForm';
+import Logo from '../../components/Logo/Logo';
 
 import {loginUser} from '../../services/api';
-import {localRead} from '../../services/storage';
+import {localRead, localSave} from '../../services/storage';
 import {errorHandler} from '../../services/errorHandler';
+
 import styles from './Login.css';
 
 class Login extends Component {
@@ -67,12 +70,12 @@ class Login extends Component {
         message: errorMessage
       });
     });
-
   }
 
   render() {
     return (
       <div>
+        <Logo />
         <LoginForm
           onSubmit={this._loginUser} />
         <div id="message" className={styles.message}>{this.state.message}</div>
