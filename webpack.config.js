@@ -5,7 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const outputCss = 'styles/[name].css';
 
 var config = {
-  entry: './app/index.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
@@ -13,16 +13,20 @@ var config = {
   },
   module: {
     loaders: [
+    { test: /\.(png|jpg)$/, loader: 'url-loader?limit=25000' },
     { test: /\.(js)$/, loader: 'babel-loader', exclude: /node_modules/ },
     { test: /\.(css)$/, loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' }) }
     ]
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
-    template: 'app/index.html'
+    template: 'public/index.html'
   }),
     new ExtractTextPlugin(outputCss)
 ]
