@@ -5,10 +5,6 @@ class Store {
     this.storeState = observable({
       loginEmail: '',
       loginMessage: '',
-      registerEmail: '',
-      registerUsername: '',
-      registerPassword: '',
-      registerPasswordRepeat: '',
       registerMessage: ''
     });
   }
