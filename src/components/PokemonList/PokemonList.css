@@ -1,5 +1,10 @@
 .list {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 300px;
+  cursor: pointer;
+  box-shadow: 0;
+  transition: box-shadow 300ms ease-in;
 }

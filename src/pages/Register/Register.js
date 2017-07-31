@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
+
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import Logo from '../../components/Logo/Logo';
 
@@ -54,6 +56,8 @@ class Register extends Component {
         message: 'User created succesfully. Please log in.'
       });
       localSave('apiToken', result.data.attributes['auth-token']);
+      localSave('email', email);
+      browserHistory.push('/');
     })
     .catch((error) => {
       const errorMessage = `Error: ${error}`;

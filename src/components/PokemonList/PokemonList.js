@@ -8,13 +8,20 @@ class PokemonList extends Component {
   constructor(args) {
     super(args);
     this.state = {
-      error: '',
+      message: '',
       pokemons: []
     };
   }
 
   componentWillMount() {
     getPokemons().then((result) => {
+      console.log(result);
+      if (typeof result.errors !== 'undefined') {
+        this.setState({
+          message: errorHandler(result.errors)
+        });
+        return;
+      }
       this.setState({
         pokemons: result.data
       });

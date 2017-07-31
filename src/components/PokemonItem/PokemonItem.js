@@ -3,12 +3,22 @@ import {browserHistory, Link} from 'react-router';
 
 import styles from './PokemonItem.css';
 
-export default class PokemonItem extends Component {
-  render () {
-    const pokemon = this.props.pokemon;
+const PokemonItem = ({pokemon}) => {
+    const {id, attributes} = pokemon;
+
+    const path = `/pokemon/${id}/`;
+    const pokemonImageUrl = `https://pokedex.byinfinum.co/${attributes['image-url']}`;
 
     return(
-      <div className={styles.item}>bla</div>
+      <Link to={path} className={styles.item}>
+        <img className={styles.image} src={pokemonImageUrl} alt={attributes.name} />
+        <div className={styles.meta}>
+          <span className={styles.name}>{attributes.name}</span>
+          <span className={styles.likes}></span>
+        </div>
+        <div className={styles.description}>{attributes.description}</div>
+      </Link>
     );
-  }
-}
+};
+
+export default PokemonItem;

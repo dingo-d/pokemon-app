@@ -3,7 +3,7 @@ import {localRead} from './storage';
 const authToken = localRead('apiToken');
 const authEmail = localRead('email');
 
-const _fetchData = (endpoint, method, headers, body) => {
+const fetchData = (endpoint, method, headers, body) => {
   const options = {};
 
   options.method = method;
@@ -28,7 +28,7 @@ export function registerUser(attributes) {
     'Content-Type': 'application/json'
   };
 
-  return _fetchData('users', 'POST', headers, body);
+  return fetchData('users', 'POST', headers, body);
 }
 
 export function loginUser(attributes) {
@@ -43,7 +43,7 @@ export function loginUser(attributes) {
     'Content-Type': 'application/json'
   };
 
-  return _fetchData('users/login', 'POST', headers, body);
+  return fetchData('users/login', 'POST', headers, body);
 }
 
 export function getPokemons() {
@@ -52,5 +52,5 @@ export function getPokemons() {
     'Authorization': `Token token=${authToken}, email=${authEmail}`
   };
 
-  return _fetchData('pokemons', 'GET', headers);
+  return fetchData('pokemons', 'GET', headers);
 }

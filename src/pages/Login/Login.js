@@ -53,6 +53,7 @@ class Login extends Component {
 
     loginUser({email, password, authToken})
     .then((result) => {
+      console.log(result);
       if (typeof result.errors !== 'undefined') {
         this.setState({
           message: errorHandler(result.errors)
