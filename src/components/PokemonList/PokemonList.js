@@ -3,6 +3,7 @@ import PokemonItem from '../PokemonItem/PokemonItem';
 import styles from './PokemonList.css';
 
 import {getPokemons} from '../../services/api';
+import {errorHandler} from '../../services/errorHandler';
 
 class PokemonList extends Component {
   constructor(args) {
@@ -15,7 +16,6 @@ class PokemonList extends Component {
 
   componentWillMount() {
     getPokemons().then((result) => {
-      console.log(result);
       if (typeof result.errors !== 'undefined') {
         this.setState({
           message: errorHandler(result.errors)
@@ -37,6 +37,7 @@ class PokemonList extends Component {
     const pokemons = this.state.pokemons;
     return(
       <div className={styles.list}>
+        <div id="message" className={styles.message}>{this.state.message}</div>
         {
           pokemons.map((pokemon, i) => <PokemonItem pokemon={pokemon} key={i} />)
         }

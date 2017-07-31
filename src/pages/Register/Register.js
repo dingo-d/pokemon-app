@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
+import {observable, action} from 'mobx';
+import {observer} from 'mobx-react';
 
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import Logo from '../../components/Logo/Logo';
@@ -8,38 +10,26 @@ import {registerUser} from '../../services/api';
 import {localSave} from '../../services/storage';
 import {errorHandler} from '../../services/errorHandler';
 
+import store from '../../state/store';
+
 import styles from './Register.css';
 
+@observer
 class Register extends Component {
-  constructor(args) {
-    super(args);
-    this.state = {
-      username: '',
-      email: '',
-      password: '',
-      passwordRepeat: '',
-      message: ''
-    };
 
-    this._registerUser = this._registerUser.bind(this);
-    this._validateRegisterForm = this._validateRegisterForm.bind(this);
-  }
-
-  _validateRegisterForm(password, passwordConfirmation) {
+  @action.bound _validateRegisterForm(password, passwordConfirmation) {
     let formIsValid = true;
-    this.state.message = '';
 
     if (password !== passwordConfirmation) {
-      this.setState({
-        message: 'Passwords do not match!'
-      });
+      store.storeState.registerMessage = 'Passwords do not match!';
+      console.log(store);
       formIsValid = false;
     }
 
     return formIsValid;
   }
 
-  _registerUser(username, email, password, passwordConfirmation) {
+  @action.bound _registerUser(username, email, password, passwordConfirmation) {
     if (!this._validateRegisterForm(password, passwordConfirmation)) {
       return;
     }
@@ -47,23 +37,17 @@ class Register extends Component {
     registerUser({username, email, password, passwordConfirmation})
     .then((result) => {
       if (typeof result.errors !== 'undefined') {
-        this.setState({
-          message: errorHandler(result.errors)
-        });
+        store.storeState.registerMessage = errorHandler(result.errors);
         return;
       }
-      this.setState({
-        message: 'User created succesfully. Please log in.'
-      });
+      store.storeState.registerMessage = 'User created succesfully. Please log in.';
       localSave('apiToken', result.data.attributes['auth-token']);
       localSave('email', email);
       browserHistory.push('/');
     })
     .catch((error) => {
       const errorMessage = `Error: ${error}`;
-      this.setState({
-        message: errorMessage
-      });
+      store.storeState.registerMessage = errorMessage;
     });
   }
 
@@ -72,7 +56,7 @@ class Register extends Component {
       <div>
         <Logo />
         <RegisterForm onSubmit={this._registerUser} />
-        <div id="message" className={styles.message}>{this.state.message}</div>
+        <div id="message" className={styles.message}>{store.storeState.registerMessage}</div>
       </div>
     );
   }

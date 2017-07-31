@@ -48,8 +48,8 @@ export function loginUser(attributes) {
 
 export function getPokemons() {
   const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Token token=${authToken}, email=${authEmail}`
+    'Authorization': `Token token=${authToken}, email=${authEmail}`,
+    'Content-Type': 'application/json'
   };
 
   return fetchData('pokemons', 'GET', headers);
