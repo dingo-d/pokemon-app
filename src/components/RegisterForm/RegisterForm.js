@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import {observable, action} from 'mobx';
+import {observer} from 'mobx-react';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import styles from './RegisterForm.css';
 
+@observer
 class RegisterForm extends Component {
   constructor(args) {
     super(args);
@@ -14,39 +17,33 @@ class RegisterForm extends Component {
       password: '',
       passwordRepeat: ''
     };
-
-    this._handleUsernameChange = this._handleUsernameChange.bind(this);
-    this._handleEmailChange = this._handleEmailChange.bind(this);
-    this._handlePasswordChange = this._handlePasswordChange.bind(this);
-    this._handlePasswordRepeatChange = this._handlePasswordRepeatChange.bind(this);
-    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  _handleUsernameChange(e) {
+  @action.bound _handleUsernameChange(e) {
     this.setState({
       username: e.target.value
     });
   }
 
-  _handleEmailChange(e) {
+  @action.bound _handleEmailChange(e) {
     this.setState({
       email: e.target.value
     });
   }
 
-  _handlePasswordChange(e) {
+  @action.bound _handlePasswordChange(e) {
     this.setState({
       password: e.target.value
     });
   }
 
-  _handlePasswordRepeatChange(e) {
+  @action.bound _handlePasswordRepeatChange(e) {
     this.setState({
       passwordRepeat: e.target.value
     });
   }
 
-  _handleSubmit(e) {
+  @action.bound _handleSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(
       this.state.username,
