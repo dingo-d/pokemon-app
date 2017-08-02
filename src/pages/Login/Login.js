@@ -45,6 +45,8 @@ class Login extends Component {
       }
       store.storeState.loginMessage = 'Logged in';
       store.storeState.loginEmail = email;
+      localSave('apiToken', result.data.attributes['auth-token']);
+      localSave('email', result.data.attributes['email']);
       browserHistory.push('/home');
     })
     .catch((error) => {

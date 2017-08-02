@@ -54,3 +54,12 @@ export function getPokemons() {
 
   return fetchData('pokemons', 'GET', headers);
 }
+
+export function getPokemon(id) {
+  const headers = {
+    'Authorization': `Token token=${authToken}, email=${authEmail}`,
+    'Content-Type': 'application/json'
+  };
+
+  return fetchData(`pokemons/${id}`, 'GET', headers);
+}

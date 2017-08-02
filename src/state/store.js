@@ -5,7 +5,10 @@ class Store {
     this.storeState = observable({
       loginEmail: '',
       loginMessage: '',
-      registerMessage: ''
+      registerMessage: '',
+      pokemonListMessage: '',
+      pokemons: [],
+      pokemonSingleMessage: ''
     });
   }
 }
