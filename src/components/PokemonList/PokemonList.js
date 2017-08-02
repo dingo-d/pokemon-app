@@ -1,46 +1,39 @@
 import React, {Component} from 'react';
+import {observable, action} from 'mobx';
+import {observer} from 'mobx-react';
+
 import PokemonItem from '../PokemonItem/PokemonItem';
 import styles from './PokemonList.css';
 
 import {getPokemons} from '../../services/api';
 import {errorHandler} from '../../services/errorHandler';
+import store from '../../state/store';
 
+@observer
 class PokemonList extends Component {
-  constructor(args) {
-    super(args);
-    this.state = {
-      message: '',
-      pokemons: []
-    };
-  }
-
   componentWillMount() {
-    getPokemons().then((result) => {
-      if (typeof result.errors !== 'undefined') {
-        this.setState({
-          message: errorHandler(result.errors)
-        });
-        return;
-      }
-      this.setState({
-        pokemons: result.data
+    if ( ! store.storeState.pokemons.length ) {
+      getPokemons().then((result) => {
+        if (typeof result.errors !== 'undefined') {
+          store.storeState.pokemonListMessage = errorHandler(result.errors);
+          return;
+        }
+        store.storeState.pokemons = result.data;
+      }).catch((error) => {
+        const errorMessage = `Error: ${error}`;
+        store.storeState.pokemonListMessage = errorMessage;
       });
-    }).catch((error) => {
-      const errorMessage = `Error: ${error}`;
-      this.setState({
-        message: errorMessage
-      });
-    });
+    }
   }
 
   render() {
-    const pokemons = this.state.pokemons;
-    return(
+    const pokemons = store.storeState.pokemons;
+    return (
       <div className={styles.list}>
-        <div id="message" className={styles.message}>{this.state.message}</div>
         {
           pokemons.map((pokemon, i) => <PokemonItem pokemon={pokemon} key={i} />)
         }
+        <div id="message" className={styles.message}>{store.storeState.pokemonListMessage}</div>
       </div>
     );
   }
